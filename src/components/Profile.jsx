@@ -1,13 +1,12 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-//gql : make a query
 import ProfileRow from './ProfileRow'
 import { GET_PROFILES } from './queries/profileQueries'
 import Spinner from './Spinner'
+import ProfileNav from './ProfileNav'
 
 export default function Profile () {
   const { loading, error, data } = useQuery(GET_PROFILES)
-  console.log(loading, error, data)
   if (loading)
     return (
       <div>
@@ -18,6 +17,7 @@ export default function Profile () {
 
   return (
     <>
+      <ProfileNav></ProfileNav>
       {!loading && !error && (
         <table className="table table-hover mt-3">
           <thead>

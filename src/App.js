@@ -48,6 +48,7 @@ function App () {
               <div className="container">
                 <Routes>
                   <Route path='/' element={<Home />}></Route>
+                  <Route path='*' element={<NotFound />} />
                 </Routes>
               </div>
             </Router>

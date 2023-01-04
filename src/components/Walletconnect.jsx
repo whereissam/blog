@@ -2,6 +2,8 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import Blockies from 'react-blockies'
 // import '@rainbow-me/rainbowkit/styles.css';
+import { useDispatch } from 'react-redux'
+import { provider } from '../store/reducer'
 
 export default function WalletConnect () {
 
@@ -10,6 +12,9 @@ export default function WalletConnect () {
     connector: new InjectedConnector(),
   })
   const { disconnect } = useDisconnect()
+
+  const dispatch = useDispatch()
+  connect && dispatch({ type: 'ACCOUNT_LOADED', connection: address })
 
   return (
     <div className="d-flex justify-content-between">
