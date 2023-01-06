@@ -1,6 +1,6 @@
 import React from 'react'
-import Profile from '../components/Profile'
 import { useSelector } from 'react-redux'
+import PostList from '../components/PostList'
 
 export default function Home () {
   const account = useSelector(state => state.provider.connection)
@@ -8,10 +8,7 @@ export default function Home () {
 
   return (
     <div>
-      {
-        account ? (<Profile ></Profile>) : (<h1>You need to login first</h1>)
-      }
-
+      <PostList></PostList>
     </div>
   )
 }

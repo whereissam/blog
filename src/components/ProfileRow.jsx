@@ -7,6 +7,7 @@ export default function ProfileRow ({ client }) {
   //   variables: { id: client.id },
   //   refetchQueries: [{ query: GET_PROFILES }],
   // })
+  console.log(client)
 
   return (
     <tr>
