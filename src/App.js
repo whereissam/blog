@@ -16,7 +16,7 @@ function App () {
       <Route path='/' element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path='posts/:id' element={<PostPage />}></Route>
-        <Route path='profile' element={<ProfileLayout />}>
+        <Route path='profile/:id' element={<ProfileLayout />}>
           <Route path='articles' element={<Work />}></Route>
           <Route path='drafts' element={<Draft />}></Route>
           <Route path='setting' element={<Setting />}></Route>

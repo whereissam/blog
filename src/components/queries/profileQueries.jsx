@@ -27,4 +27,20 @@ const GET_PROFILE = gql`
   }
 `
 
-export { GET_PROFILES, GET_PROFILE }
+const GET_PROFILE_By_Address = gql`
+  query getClientByAddress {
+    clientSearchByAddress {
+      id
+      name
+      email
+      address
+      project{
+        title
+        body
+        status
+      }
+    }
+  }
+`
+
+export { GET_PROFILES, GET_PROFILE, GET_PROFILE_By_Address }

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { GET_PERSONAL_POST } from '../components/queries/postListQueries'
 import Spinner from '../components/Spinner'
-import { indexOf } from 'lodash'
+
 
 export default function PostPage () {
 
@@ -34,7 +34,9 @@ export default function PostPage () {
                           <img className="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                       </div> */}
               <div className="ml-2">
-                <div className="h5 m-0">@{client.name}</div>
+                <div className="h5 m-0">
+                  <Link to={`/profile/${client.address}`}>@{client.name}</Link>
+                </div>
                 <div className="h7 text-muted">{client.name}</div>
               </div>
             </div>
