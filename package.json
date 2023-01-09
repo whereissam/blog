@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.3",
+    "@rainbow-me/rainbowkit": "^0.8.1",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,7 +21,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
-    "wagmi": "^0.10.4",
+    "wagmi": "^0.9.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

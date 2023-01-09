@@ -11,4 +11,20 @@ const GET_PROFILES = gql`
   }
 `
 
-export { GET_PROFILES }
+const GET_PROFILE = gql`
+  query getClient {
+    client {
+      id
+      name
+      email
+      address
+      project{
+        title
+        body
+        status
+      }
+    }
+  }
+`
+
+export { GET_PROFILES, GET_PROFILE }

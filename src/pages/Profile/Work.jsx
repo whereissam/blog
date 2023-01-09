@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import ProfileRow from '../../components/ProfileNav'
 import { GET_PROFILES } from '../../components/queries/profileQueries'
 import Spinner from '../../components/Spinner'
 import { FaEdit } from 'react-icons/fa'
@@ -30,11 +29,6 @@ export default function Work () {
             </tr>
           </thead>
           <tbody>
-            {/* {data?.clients?.map((client) => (
-              <ProfileRow key={client.id} client={client} />
-              
-            ))
-            } */}
             {data ? (
               data?.clients.map((client) => (
                 <tr key={client.id}>

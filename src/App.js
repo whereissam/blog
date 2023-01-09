@@ -8,12 +8,14 @@ import ProfileLayout from './layouts/ProfileLayout';
 import Work from "./pages/Profile/Work";
 import Setting from "./pages/Profile/Setting";
 import Draft from "./pages/Profile/Draft";
+import PostPage from './pages/PostPage';
 
 function App () {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<RootLayout />}>
         <Route index element={<Home />} />
+        <Route path='posts/:id' element={<PostPage />}></Route>
         <Route path='profile' element={<ProfileLayout />}>
           <Route path='articles' element={<Work />}></Route>
           <Route path='drafts' element={<Draft />}></Route>

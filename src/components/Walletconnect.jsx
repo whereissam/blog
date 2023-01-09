@@ -2,9 +2,8 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
 // import '@rainbow-me/rainbowkit/styles.css';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { provider } from '../store/reducer'
-import { Navigate } from 'react-router-dom';
 
 import AccountInfoBar from './AccountInfoBar'
 
