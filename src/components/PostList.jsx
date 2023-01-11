@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export default function Profile () {
   const { loading, error, data } = useQuery(GET_POST)
-  console.log(data)
+
   if (loading)
     return (
       <div>
@@ -16,7 +16,6 @@ export default function Profile () {
   if (error) return <p>Something Went Wrong</p>
 
   const postList = data.projects.map(({ id, title, body }) => {
-    console.log(title)
     return (
       <ul className='list-group' key={id}>
         <li key={id} className="collection-item list-group-item">
@@ -24,19 +23,14 @@ export default function Profile () {
           <br />
           <div><p>{body}</p></div>
         </li>
-
       </ul>
-
     );
   });
 
   return (
     <>
       {!loading && !error && (
-
-        <div>
-          <ul className="collection list-group">{postList}</ul>
-        </div>
+        <div>{postList}</div>
       )}
     </>
   )

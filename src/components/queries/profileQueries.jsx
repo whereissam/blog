@@ -35,6 +35,7 @@ const GET_PROFILE_By_Address = gql`
       email
       address
       project{
+        id
         title
         body
         status

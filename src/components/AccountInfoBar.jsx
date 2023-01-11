@@ -1,8 +1,11 @@
 import React from 'react'
 import Blockies from 'react-blockies'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function AccountInfoBar (address, disconnect) {
+  // const connect = useSelector(state => state.provider.connection)
+  // console.log(connect)
 
   return (
 

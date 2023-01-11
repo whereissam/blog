@@ -1,14 +1,19 @@
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
-
+import { useSelector, useDispatch } from "react-redux";
 // import '@rainbow-me/rainbowkit/styles.css';
-import { useDispatch } from 'react-redux'
-import { provider } from '../store/reducer'
-
+// import { provider } from '../store/reducer'
+import { useQuery } from '@apollo/client';
+import {
+  GET_PROFILE_By_Address
+} from "../components/queries/profileQueries";
 import AccountInfoBar from './AccountInfoBar'
 
 
 export default function WalletConnect () {
+  const dispatch = useDispatch()
+  // const { refetch, loading, error, data } = useQuery(GET_PROFILE_By_Address
+  //   , { variables: { address } })
 
   const { address } = useAccount()
   const { connect } = useConnect({
@@ -16,7 +21,6 @@ export default function WalletConnect () {
   })
   const { disconnect } = useDisconnect()
 
-  const dispatch = useDispatch()
   connect && dispatch({ type: 'ACCOUNT_LOADED', connection: address })
 
   function connectClient () {
@@ -27,7 +31,12 @@ export default function WalletConnect () {
     return disconnect()
   }
 
-  // console.log(address, connect)
+  // if (data) {
+  //   var { clientSearchByAddress } = data
+  //   var { project } = clientSearchByAddress
+  // }
+
+  // data && dispatch({ type: 'PROVIDER_LOADED', address: data.clientSearchByAddress.id })
 
   return (
     <div className="row d-flex flex-row">
