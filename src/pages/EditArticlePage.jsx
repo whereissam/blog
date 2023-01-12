@@ -1,40 +1,32 @@
-import { useQuery } from '@apollo/client'
-import { useParams, Link } from 'react-router-dom'
+import { useQuery, useMutation } from '@apollo/client'
+import { useParams, useNavigate } from 'react-router-dom'
 import { GET_PERSONAL_POST } from '../components/queries/postListQueries'
 import Spinner from '../components/Spinner'
-import { FaClock } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
+import { UPDATE_ARTICLE } from '../components/mutation/articleMutation'
+
 
 export default function EditArticlePage () {
 
   const { id } = useParams()
-  console.log(id)
   const { loading, error, data } = useQuery(GET_PERSONAL_POST, { variables: { id } });
-
-  console.log(data)
   const [title, setTitle] = useState(undefined);
   const [body, setBody] = useState(undefined);
   const [status, setStatus] = useState(undefined)
-  // const [status, setStatus] = useState(() => {
-  //   switch (project.status) {
-  //     case "In Progress":
-  //       return "progress";
-  //     case "Completed":
-  //       return "completed";
-  //     default:
-  //       throw new Error(`Unknown status: ${data.project.status}`);
-  //   }
-  // });
+  const navigate = useNavigate()
+
+  const [updateArticle] = useMutation(UPDATE_ARTICLE, {
+    variables: { id, title, body, status }
+  })
 
   useEffect(() => {
     if (loading === false && data) {
-      console.log(data)
       setTitle(data.project.title)
       setBody(data.project.body)
       setStatus(() => {
         switch (data.project.status) {
           case "In Progress":
-            return "progress";
+            return "draft";
           case "Completed":
             return "completed";
           default:
@@ -53,13 +45,6 @@ export default function EditArticlePage () {
 
   if (error) return <p>Something Went Wrong</p>
 
-  if (data) {
-    var { project } = data
-    var { client } = project
-    // console.log(project, client)
-  }
-
-
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -67,7 +52,9 @@ export default function EditArticlePage () {
       return alert("Please fill out all fields");
     }
 
-    // updateProject(title, body, status);
+    updateArticle(title, body, status);
+
+    navigate(-1)
   };
 
   return (
@@ -102,7 +89,7 @@ export default function EditArticlePage () {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="progress">In Progress</option>
+              <option value="draft">In Progress</option>
               <option value="completed">Completed</option>
             </select>
           </div>
