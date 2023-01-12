@@ -1,12 +1,22 @@
 import { useQuery } from '@apollo/client'
-import { GET_PROFILES } from '../../components/queries/profileQueries'
 import Spinner from '../../components/Spinner'
 import { FaEdit } from 'react-icons/fa'
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
+import {
+  GET_PROFILE_By_Address
+} from "../../components/queries/profileQueries"
 
 export default function Work () {
 
-  const { loading, error, data } = useQuery(GET_PROFILES)
+  const address = useSelector(state => state.provider.connection)
+  const dispatch = useDispatch()
+  const { refetch, loading, error, data } = useQuery(GET_PROFILE_By_Address
+    , { variables: { address } })
+
+  console.log(data)
+
   if (loading)
     return (
       <div>
@@ -14,43 +24,46 @@ export default function Work () {
       </div>
     )
   if (error) return <p>Something Went Wrong</p>
-  console.log(data)
+
+  if (address) {
+    refetch()
+  }
+
+  if (data) {
+    var { clientSearchByAddress } = data
+    var { project } = clientSearchByAddress
+  }
+
+
+
+  const postList = data && project?.map(({ id, title, body }) => {
+    return (
+      <ul className='list-group mt-2' key={id}>
+        <li key={id} className="collection-item list-group-item list-group-item-action flex-column align-items-start">
+          <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1"><Link to={`/posts/${id}`}>{title}</Link></h5>
+            <small>3 days ago</small>
+          </div>
+          <div className="d-flex w-100 justify-content-between mt-2">
+            <p>{body}</p>
+
+            <a className='btn btn-light' href={`/profile/${clientSearchByAddress.address}/article/${id}`}>
+              <FaEdit></FaEdit>
+            </a>
+
+          </div>
+
+        </li>
+      </ul>
+    );
+  });
 
   return (
     <>
-      {!loading && !error && (
-        <table className="table table-hover mt-3">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {data ? (
-              data?.clients.map((client) => (
-                <tr key={client.id}>
-                  <td>{client.name}</td>
-                  <td>{client.email}</td>
-                  <td>{client.address}</td>
-                  <td>
-                    {/* <button className="btn btn-danger btn-sm" onClick={editClient}> */}
-                    <button className="btn btn-danger btn-sm">
-                      <FaEdit />
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td>N/A</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      )}
+      {
+        address && <div>{postList}</div>
+      }
+
     </>
   )
 }

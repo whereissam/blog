@@ -10,6 +10,7 @@ import Setting from "./pages/Profile/Setting";
 import Draft from "./pages/Profile/Draft";
 import PostPage from './pages/PostPage';
 import PrivateRoutes from './utils/PrivateRoutes';
+import EditArticlePage from './pages/EditArticlePage';
 
 function App () {
   const router = createBrowserRouter(
@@ -20,6 +21,7 @@ function App () {
         <Route path='profile/:id' element={<ProfileLayout />}>
           <Route element={<PrivateRoutes />}>
             <Route path='articles' element={<Work />}></Route>
+            <Route path='article/:id' element={<EditArticlePage />}></Route>
             <Route path='drafts' element={<Draft />}></Route>
             <Route path='setting' element={<Setting />}></Route>
           </Route>
