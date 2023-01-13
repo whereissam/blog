@@ -1,11 +1,18 @@
 import React from 'react'
 import Blockies from 'react-blockies'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
-export default function AccountInfoBar (address, disconnect) {
-  // const connect = useSelector(state => state.provider.connection)
-  // console.log(connect)
+
+export default function AccountInfoBar (address, disconnect, data) {
+
+  console.log(data)
+
+  let route
+  if (data && data.clientSearchByAddress) {
+    route = `/profile/${address}/articles`
+  } else {
+    route = `/profile/${address}/setting`
+  }
 
   return (
 
@@ -27,14 +34,10 @@ export default function AccountInfoBar (address, disconnect) {
         <div className="col">
           <div className="d-grid gap-2 d-md-flex justify-content-md-end">
             <button className='btn btn-primary btn-sm' onClick={disconnect}>Disconnect</button>
-            <Link to={"/profile"}>Go to profile</Link>
-            {/* <button className='btn btn-primary btn-sm'>Go to profile</button> */}
+            <Link to={route}>Go to profile</Link>
           </div>
         </div>
       </div>
-
-
-
     </div>
 
   )

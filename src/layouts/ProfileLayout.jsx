@@ -30,12 +30,13 @@ export default function ProfileLayout () {
     refetch()
   }
 
-  if (data) {
+  if (data && data !== undefined && data.clientSearchByAddress !== null) {
+    console.log(data)
     var { clientSearchByAddress } = data
     var { project } = clientSearchByAddress
   }
 
-  data && dispatch({ type: 'PROVIDER_LOADED', address: data.clientSearchByAddress.id })
+  data && data.clientSearchByAddress && dispatch({ type: 'PROVIDER_LOADED', address: data.clientSearchByAddress.id })
 
   const postList = data && project?.map(({ id, title, body }) => {
     return (

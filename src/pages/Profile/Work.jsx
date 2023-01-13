@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import Spinner from '../../components/Spinner'
 import { FaEdit } from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import {
   GET_PROFILE_By_Address
@@ -10,11 +10,14 @@ import {
 
 export default function Work () {
 
+  const { id } = useParams()
+  // console.log(id)
   const address = useSelector(state => state.provider.connection)
   const dispatch = useDispatch()
   const { refetch, loading, error, data } = useQuery(GET_PROFILE_By_Address
     , { variables: { address } })
 
+  // console.log(address, data)
   console.log(data)
 
   if (loading)
@@ -29,14 +32,14 @@ export default function Work () {
     refetch()
   }
 
-  if (data) {
+  if (data && data !== undefined && data.clientSearchByAddress !== null) {
     var { clientSearchByAddress } = data
     var { project } = clientSearchByAddress
   }
 
 
 
-  const postList = data && project?.map(({ id, title, body }) => {
+  const postList = data.length > 0 && project?.map(({ id, title, body }) => {
     return (
       <ul className='list-group mt-2' key={id}>
         <li key={id} className="collection-item list-group-item list-group-item-action flex-column align-items-start">

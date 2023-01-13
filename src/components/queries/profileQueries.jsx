@@ -12,8 +12,8 @@ const GET_PROFILES = gql`
 `
 
 const GET_PROFILE = gql`
-  query getClient {
-    client {
+  query getClient($id: ID!) {
+    client(id : $id) {
       id
       name
       email
@@ -28,8 +28,8 @@ const GET_PROFILE = gql`
 `
 
 const GET_PROFILE_By_Address = gql`
-  query getClientByAddress {
-    clientSearchByAddress {
+  query getClientByAddress($address: String!) {
+    clientSearchByAddress(address : $address) {
       id
       name
       email

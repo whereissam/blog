@@ -17,11 +17,13 @@ export default function Profile () {
 
   const postList = data.projects.map(({ id, title, body }) => {
     return (
-      <ul className='list-group' key={id}>
-        <li key={id} className="collection-item list-group-item">
-          <Link to={`/posts/${id}`}>{title}</Link>
-          <br />
-          <div><p>{body}</p></div>
+      <ul className='list-group mt-2' key={id}>
+        <li key={id} className="collection-item list-group-item list-group-item-action flex-column align-items-start">
+          <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1"><Link to={`/posts/${id}`}>{title}</Link></h5>
+            <small>3 days ago</small>
+          </div>
+          <p className='mt-2'>{body}</p>
         </li>
       </ul>
     );
