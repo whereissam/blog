@@ -24,28 +24,25 @@ const ADD_USER = gql`
 
 
 const UPDATE_USER = gql`
-  mutation UpdateProject(
+  mutation UpdateClient(
     $id: ID!
-    $title: String!
-    $body: String!
-    $status: ProjectStatusUpdate!
+    $name: String!
+    $userName: String!
+    $email: String!
+    $address: String!
   ) {
-    updateProject(
+    updateClient(
       id: $id
-      title: $title
-      body: $body
-      status: $status
+      name: $name
+      userName: $userName
+      email: $email
+      address: $address
     ) {
       id
-      title
-      body
-      status
-      client {
-        id
-        name
-        email
-        address
-      }
+      name
+      userName
+      email
+      address
     }
   }
 `;

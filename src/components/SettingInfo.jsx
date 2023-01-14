@@ -1,20 +1,18 @@
 import { useMutation } from "@apollo/client"
 import { useState } from "react"
 
-import { ADD_USER } from "./mutation/userMutation"
+import { UPDATE_USER } from "./mutation/userMutation"
 
-export default function SettingInfo (data) {
-
-  const { clientSearchByAddress } = data.data
-  console.log(clientSearchByAddress)
+export default function SettingInfo (accountData) {
+  console.log(accountData)
+  const { clientSearchByAddress } = accountData.accountData
   const [name, setName] = useState(clientSearchByAddress.name)
   const [email, setEmail] = useState(clientSearchByAddress.email)
   const [userName, setUserName] = useState(clientSearchByAddress.name)
   const [address, setAddress] = useState(clientSearchByAddress.address)
-  console.log(data)
 
-  const [addUser] = useMutation(ADD_USER, {
-    variables: { name, userName, address, email },
+  const [updateUser, { data }] = useMutation(UPDATE_USER, {
+    variables: { id: clientSearchByAddress.id, name, userName, address, email },
   });
 
   const onSubmit = (e) => {
@@ -24,9 +22,11 @@ export default function SettingInfo (data) {
       return alert("Please fill out all fields");
     }
 
-    addUser(name, email, address, userName);
+    updateUser(name, email, address, userName);
   };
 
+  console.log(data)
+  if (data) alert('Change Success')
 
   return (
     <>
@@ -42,7 +42,7 @@ export default function SettingInfo (data) {
                 <div className="list-group list-group-flush account-settings-links">
                   <a className="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
                   {/* <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a> */}
-                  <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
+                  {/* <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a> */}
                   {/* <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
         <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
         <a className="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a> */}
