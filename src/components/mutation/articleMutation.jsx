@@ -6,12 +6,14 @@ const ADD_ARTICLE = gql`
     $body: String!
     $status: ProjectStatus!
     $clientId: ID!
+    $clientAddress : String!
   ) {
     addProject(
       title: $title
       body: $body
       status: $status
       clientId: $clientId
+      clientAddress: $clientAddress
     ) {
       id
       title
