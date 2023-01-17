@@ -3,12 +3,15 @@ import { useQuery } from '@apollo/client'
 import { useParams, Link } from 'react-router-dom'
 import { GET_PERSONAL_POST } from '../components/queries/postListQueries'
 import Spinner from '../components/Spinner'
-
+import { useSelector } from 'react-redux'
 
 export default function PostPage () {
 
   const { id } = useParams()
   const { loading, error, data } = useQuery(GET_PERSONAL_POST, { variables: { id } });
+  const address = useSelector(state => state.provider.connection)
+  console.log(address)
+
 
   if (loading)
     return (
@@ -18,10 +21,17 @@ export default function PostPage () {
     )
   if (error) return <p>Something Went Wrong</p>
 
+  let route
+
   if (data) {
     var { project } = data
     var { client } = project
-    console.log(project, client)
+
+    if (client.address === address) {
+      route = `/profile/${client.address}/articles`
+    } else {
+      route = `/profile/${client.address}/public`
+    }
   }
 
   return (
@@ -35,7 +45,7 @@ export default function PostPage () {
                       </div> */}
               <div className="ml-2">
                 <div className="h5 m-0">
-                  <Link to={`/profile/${client.address}`}>@{client.name}</Link>
+                  <Link to={route}>@{client.name}</Link>
                 </div>
                 <div className="h7 text-muted">{client.name}</div>
               </div>

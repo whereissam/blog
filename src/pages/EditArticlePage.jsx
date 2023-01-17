@@ -60,14 +60,14 @@ export default function EditArticlePage () {
   return (
     <>
       <div className="mt-5">
-        <h3>Update Article</h3>
+        <h3 className='mb-5'>Update Article</h3>
         <form onSubmit={onSubmit}>
           <div className="mb-3">
-            <label className="form-label">Name</label>
+            <label className="form-label">Title</label>
             <input
               type="text"
               className="form-control"
-              id="name"
+              id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -94,7 +94,7 @@ export default function EditArticlePage () {
             </select>
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary mb-5">
             Submit
           </button>
         </form>
